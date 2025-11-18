@@ -52,7 +52,7 @@ export function Minesweeper() {
   const handleClick = (r: number, c: number) => {
     if (gameOver || win || grid[r][c].isOpen) return;
 
-    const newGrid = [...grid];
+    const newGrid = grid.map(row => [...row]);
     if (newGrid[r][c].isMine) {
       setGameOver(true);
       // Reveal all

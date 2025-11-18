@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-export function Notepad() {
-  const [text, setText] = useState("Welcome to Gemini OS.\n\nFeel free to type notes here.");
+export function Notepad({ initialContent }: { initialContent?: string }) {
+  const [text, setText] = useState(initialContent || "Welcome to Gemini OS.\n\nFeel free to type notes here.");
 
   return (
     <div className="flex flex-col h-full">
