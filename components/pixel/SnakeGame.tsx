@@ -89,10 +89,10 @@ export function SnakeGame() {
     const loop = (timestamp: number) => {
       if (!running) return;
 
+      const dir = directionRef.current;
+
       if (timestamp - lastTime > speed) {
         lastTime = timestamp;
-
-        const dir = directionRef.current;
 
         // Only move if a direction has been set
         if (dir.x !== 0 || dir.y !== 0) {
