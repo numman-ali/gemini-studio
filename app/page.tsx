@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { demos } from "@/lib/demos";
 import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
@@ -27,16 +28,20 @@ export default function Home() {
             <span className="text-xs font-mono text-neutral-500 tracking-widest mb-2">EST. 2025</span>
             <h1 className="text-xl font-bold tracking-tighter">GEMINI STUDIO</h1>
           </div>
-          <div className="text-right">
-             <p className="text-xs font-mono text-neutral-500 tracking-widest mb-1">GEMINI 3 PRO ACTIVE</p>
+          <a
+            href="https://x.com/nummanthinks"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-right hover:text-white transition-colors group"
+          >
+             <p className="text-xs font-mono text-neutral-500 group-hover:text-neutral-400 tracking-widest mb-1">CREATED BY</p>
              <div className="flex items-center justify-end gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                <span className="text-xs font-bold">ONLINE</span>
+                <span className="text-xs font-bold group-hover:underline">@NUMMANTHINKS</span>
+                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
              </div>
-          </div>
+          </a>
         </header>
 
         <div className="relative z-10">
@@ -76,13 +81,24 @@ export default function Home() {
       <section className="relative z-10 bg-[#030303] min-h-screen border-t border-neutral-900">
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {demos.map((demo, i) => (
-               <Link key={demo.id} href={`/demos/${demo.id}`} className="group relative block border-b md:border-r border-neutral-900 aspect-[4/5] overflow-hidden cursor-none">
+               <Link key={demo.id} href={`/demos/${demo.id}`} className="group relative block border-b md:border-r border-neutral-900 aspect-[4/5] overflow-hidden">
+                  {/* Screenshot Background */}
+                  <div className="absolute inset-0">
+                     <Image
+                        src={`/screenshots/${demo.id}.png`}
+                        alt={demo.name}
+                        fill
+                        className="object-cover opacity-80 group-hover:opacity-0 transition-opacity duration-700"
+                     />
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:opacity-0 transition-opacity duration-700" />
+                  </div>
+
                   {/* Background Color Reveal */}
-                  <div 
+                  <div
                      className="absolute inset-0 transition-transform duration-700 ease-out translate-y-full group-hover:translate-y-0"
-                     style={{ backgroundColor: demo.color }} // Note: Hex colors work best here, Tailwind classes might need adjustment if not mapped
+                     style={{ backgroundColor: demo.color }}
                   />
-                  
+
                   {/* Content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-between z-10">
                      <div className="flex justify-between items-start overflow-hidden">
@@ -93,22 +109,19 @@ export default function Home() {
                      </div>
 
                      <div>
-                        <motion.h3 
-                           className="text-4xl font-bold tracking-tight mb-2 text-white group-hover:text-black mix-blend-difference transition-colors duration-500"
+                        <motion.h3
+                           className="text-4xl font-bold tracking-tight mb-2 text-white group-hover:text-black transition-colors duration-500"
                            initial={{ y: 20, opacity: 0 }}
                            whileInView={{ y: 0, opacity: 1 }}
                            transition={{ delay: 0.1 }}
                         >
                            {demo.name}
                         </motion.h3>
-                        <p className="text-sm font-mono text-neutral-500 group-hover:text-black/70 transition-colors duration-500 uppercase tracking-widest">
+                        <p className="text-sm font-mono text-neutral-400 group-hover:text-black/70 transition-colors duration-500 uppercase tracking-widest">
                            {demo.desc}
                         </p>
                      </div>
                   </div>
-
-                  {/* Hover Image/Effect (Optional, could serve fallback) */}
-                  <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                </Link>
             ))}
          </div>
@@ -120,8 +133,12 @@ export default function Home() {
             </div>
             <div className="flex gap-8 text-sm font-bold mb-2 md:mb-4">
                <a href="https://github.com/numman-ali/gemini-studio" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-500 transition-colors">GITHUB</a>
-               <a href="https://github.com/numman-ali" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-500 transition-colors">AUTHOR</a>
-               <a href="/contact" className="hover:text-neutral-500 transition-colors">CONTACT</a>
+               <a href="https://x.com/nummanthinks" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-500 transition-colors flex items-center gap-1">
+                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                  @NUMMANTHINKS
+               </a>
             </div>
          </div>
       </section>
